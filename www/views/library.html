@@ -1,0 +1,16 @@
+<ion-view view-title="Library">
+  <ion-content>
+  <a ng-href="#/app/read/{{book._id}}" ng-repeat="book in vm.books">
+    <div class="list card">
+      <div class="item item-avatar" item-icon-right>
+        <img src="{{book.coverImageFile._downloadURL}}">
+        <span class="open-span">
+            <img class="open-icon" src="img/open.png"> 
+        </span>
+        <h2>{{book.title}}</h2>
+        <p class="subdued">{{book.author}}</p>
+      </div>
+    </div>
+    </a>
+  </ion-content>
+</ion-view>
