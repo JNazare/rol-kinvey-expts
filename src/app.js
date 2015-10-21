@@ -3,6 +3,12 @@ require('./modules/controllers');
 require('./modules/services');
 let initialized = false;
 
+function constructQuery(path, query, attribute){
+  var value = path.split("/").slice(-1).pop();
+  query.equalTo(attribute, value);
+  return query
+}
+
 const app = angular.module('Kinvey', [
   'ionic',
   'kinvey',
@@ -75,11 +81,14 @@ app.config(function($stateProvider) {
       views: {
         content: {
           templateUrl: 'views/read.html',
-          controller: 'PagesCtrl',
+          controller: 'PagesCtrl as vm',
           resolve: {
-            pages: function(DataStore) {
+            pages: function(DataStore, $kinvey, $location) {
               'ngInject';
-              return DataStore.find('pages');
+              return DataStore.find('pages', constructQuery($location.path(), new $kinvey.Query(), 'bookId'));
+            },
+            book: function(DataStore, $kinvey, $location) {
+              return DataStore.find('books', constructQuery($location.path(), new $kinvey.Query(), '_id'));
             }
           }
         }

@@ -1,22 +1,12 @@
-<ion-view view-title="Read">
+<ion-view view-title="{{vm.book.title}}">
   <ion-content class="has-subfooter">
-    <div class="list card">
+    <div class="list card" ng-repeat="page in vm.pages">
         <div class="item item-avatar item-text-wrap" item-icon-right>
-          <img src="https://corduroysbutton.files.wordpress.com/2011/11/cord1.jpg">
+          <img src="{{page.image._downloadURL}}">
           <p class="subdued pagetext">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed efficitur erat, vitae rhoncus arcu. Aenean rhoncus nunc consectetur congue faucibus. Cras eget eleifend neque. Ut sed mollis risus. Pellentesque quis ligula augue. Nullam pretium arcu augue, vel accumsan neque pellentesque id. Vestibulum tempus ornare ligula, et ullamcorper ex cursus non. In ac dapibus sem, nec ornare enim. Proin viverra accumsan commodo. Aliquam cursus, diam id scelerisque interdum, risus lectus bibendum justo, at rhoncus diam eros a lacus. Nullam blandit sapien tellus, at congue quam ultrices vel. Aenean non mauris ac augue pulvinar condimentum sed eu nunc.
+            {{page.text}}
           </p>
-          <h2 class="pagenum">1</h2>
-        </div>
-      </div>
-
-      <div class="list card">
-        <div class="item item-avatar item-text-wrap" item-icon-right>
-          <img src="https://corduroysbutton.files.wordpress.com/2011/11/cord1.jpg">
-          <p class="subdued pagetext">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed efficitur erat, vitae rhoncus arcu. Aenean rhoncus nunc consectetur congue faucibus. Cras eget eleifend neque. Ut sed mollis risus. Pellentesque quis ligula augue. Nullam pretium arcu augue, vel accumsan neque pellentesque id. Vestibulum tempus ornare ligula, et ullamcorper ex cursus non. In ac dapibus sem, nec ornare enim. Proin viverra accumsan commodo. Aliquam cursus, diam id scelerisque interdum, risus lectus bibendum justo, at rhoncus diam eros a lacus. Nullam blandit sapien tellus, at congue quam ultrices vel. Aenean non mauris ac augue pulvinar condimentum sed eu nunc.
-          </p>
-          <h2 class="pagenum">2</h2>
+          <h2 class="pagenum">{{page.pageNumber}}</h2>
         </div>
       </div>
   </ion-content>

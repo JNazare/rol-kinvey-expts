@@ -6,6 +6,12 @@ require('./modules/controllers');
 require('./modules/services');
 var initialized = false;
 
+function constructQuery(path, query, attribute) {
+  var value = path.split("/").slice(-1).pop();
+  query.equalTo(attribute, value);
+  return query;
+}
+
 var app = angular.module('Kinvey', ['ionic', 'kinvey', 'config', 'controllers', 'services']);
 
 app.config(function ($logProvider) {
@@ -67,11 +73,14 @@ app.config(function ($stateProvider) {
     views: {
       content: {
         templateUrl: 'views/read.html',
-        controller: 'PagesCtrl',
+        controller: 'PagesCtrl as vm',
         resolve: {
-          pages: function pages(DataStore) {
+          pages: function pages(DataStore, $kinvey, $location) {
             'ngInject';
-            return DataStore.find('pages');
+            return DataStore.find('pages', constructQuery($location.path(), new $kinvey.Query(), 'bookId'));
+          },
+          book: function book(DataStore, $kinvey, $location) {
+            return DataStore.find('books', constructQuery($location.path(), new $kinvey.Query(), '_id'));
           }
         }
       }
@@ -172,11 +181,12 @@ Object.defineProperty(exports, '__esModule', {
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var PagesCtrl = function PagesCtrl(pages) {
+var PagesCtrl = function PagesCtrl(pages, book) {
   'ngInject';
 
   _classCallCheck(this, PagesCtrl);
 
+  this.book = book[0];
   this.pages = pages;
 };
 

@@ -1,7 +1,7 @@
 class PagesCtrl {
-  constructor(pages) {
+  constructor(pages, book) {
     'ngInject';
-
+    this.book = book[0];
     this.pages = pages;
   }
 }
